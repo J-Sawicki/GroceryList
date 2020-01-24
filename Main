@@ -1,0 +1,97 @@
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner (System.in);
+    private static GroceryList groceryList = new GroceryList();
+
+    public static void main(String[] args) {
+    boolean quit = false;
+    int choice = 0;
+    printInstruction ();
+    while (!quit){
+        System.out.println("Select your choice");
+        choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 0:
+                printInstruction ();
+                break;
+            case 1:
+                groceryList.printGroceryList();
+                break;
+            case 2:
+                addGroceryItem();
+                break;
+            case 3:
+                modifyGroceryItem();
+                break;
+            case 4:
+                removeGroceryItem();
+                break;
+            case 5:
+                findItem();
+                break;
+            case 6:
+                processArrayList();
+            case 7:
+                quit = true;
+                break;
+
+        }
+    }
+    }
+
+    public static void printInstruction(){
+        System.out.println("0 - print instruction");
+        System.out.println("1 - show grocery list");
+        System.out.println("2 - add item to the list");
+        System.out.println("3 - modify item on grocery list");
+        System.out.println("4 - remove item from the list");
+        System.out.println("5  - find item on the list");
+        System.out.println("6 - quit the application");
+    }
+
+    public static void addGroceryItem(){
+        System.out.print("Please, enter item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
+    }
+
+    public static void modifyGroceryItem (){
+        System.out.print("Enter item name:");
+        String oldItem = scanner.nextLine();
+        System.out.println("Enter replacement item:");
+        String newItem = scanner.nextLine();
+        groceryList.modifyGroceryItem(oldItem, newItem);
+    }
+
+    public static void removeGroceryItem(){
+        System.out.print("Enter item name:");
+        String item = scanner.nextLine();
+        groceryList.removeGroceryItem(item);
+    }
+
+    public static void findItem (){
+        System.out.println("Item to search for ");
+        String searchItem = scanner.nextLine();
+        if (groceryList.onFile(searchItem)){
+            System.out.println("Found " + searchItem);
+        } else {
+            System.out.println("No found, pls no kill");
+        }
+    }
+    public static void processArrayList (){
+        ArrayList <String> newArray = new ArrayList <String>();
+        newArray.addAll(groceryList.getGroceryList());
+
+        ArrayList <String> nextArray = new ArrayList <String>(groceryList.getGroceryList());
+
+        String [] myArray = new String [groceryList.getGroceryList().size()];
+        myArray = groceryList.getGroceryList().toArray(myArray);
+    }
+
+
+}
